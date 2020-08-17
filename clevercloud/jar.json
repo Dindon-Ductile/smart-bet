@@ -1,0 +1,5 @@
+{
+  "deploy": {
+    "jarName": "server/build/libs/smartbet.jar"
+  }
+}
