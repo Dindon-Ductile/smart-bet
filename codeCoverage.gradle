@@ -1,0 +1,65 @@
+class CodeCoverageExtension {
+    def project
+    def rootProject
+
+    CodeCoverageExtension(Project project, Project rootProject) {
+        this.project = project
+        this.rootProject = rootProject
+    }
+
+    def computeJacocoAdditionalSourceDirs() {
+        def moduleDependencies = computeAllTransitiveModuleDependencies(project)
+        def moduleDependenciesSourceDirs = moduleDependencies.collect { it.sourceSets.main.allJava.srcDirs }
+                .flatten()
+                .findAll { it.exists() }
+        return project.files(moduleDependenciesSourceDirs)
+    }
+
+    def computeJacocoAdditionalClassDirs() {
+        def moduleDependencies = computeAllTransitiveModuleDependencies(project)
+        def moduleDependenciesClassDirs = moduleDependencies.collect { it.sourceSets.main.output.files }
+                .flatten()
+                .findAll { it.exists() }
+        return project.files(moduleDependenciesClassDirs)
+    }
+
+    private def computeAllTransitiveModuleDependencies(project) {
+        def moduleDependencies = computeAllModuleDependencies(project)
+        def transitiveModuleDependencies = moduleDependencies.collect { computeAllTransitiveModuleDependencies(it) }
+                .flatten()
+        return moduleDependencies.plus(transitiveModuleDependencies).toSet()
+    }
+
+    def computeJacocoModuleReportsPaths() {
+        def moduleUsages = computeAllModuleUsages(project)
+        moduleUsages.add(project)
+        return moduleUsages.collect { it.jacocoTestReport.executionData.files }
+                .flatten()
+                .findAll { it.exists() }
+    }
+
+    private def computeAllModuleUsages(project) {
+        def directModuleUsages = rootProject.subprojects.findAll { computeAllModuleDependencies(it).contains(project) }
+        def transitiveModuleUsages = directModuleUsages.collect { computeAllModuleUsages(it) }.flatten()
+        return directModuleUsages.plus(transitiveModuleUsages).toSet()
+    }
+
+    private def computeAllModuleDependencies(project) {
+        return project.configurations.compile.allDependencies
+                .findAll { it instanceof ProjectDependency }
+                .collect { it.dependencyProject }
+    }
+}
+
+extensions.add('codeCoverage', new CodeCoverageExtension(project, rootProject))
+
+apply plugin: "jacoco"
+
+jacocoTestReport {
+    doFirst {
+        jacocoTestReport {
+            additionalSourceDirs = codeCoverage.computeJacocoAdditionalSourceDirs()
+            additionalClassDirs = codeCoverage.computeJacocoAdditionalClassDirs()
+        }
+    }
+}

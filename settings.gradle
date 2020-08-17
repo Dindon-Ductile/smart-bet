@@ -1,2 +1,4 @@
 rootProject.name = 'demo'
+include 'server'
+include 'object-mapping'
 

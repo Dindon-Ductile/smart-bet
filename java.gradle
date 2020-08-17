@@ -1,0 +1,49 @@
+apply plugin: "java"
+
+apply from: "${rootProject.projectDir}/testFixtures.gradle"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.compilerArgs << "-parameters" << "-Xlint:deprecation" << "-Xlint:unchecked"
+}
+
+compileJava {
+    options.annotationProcessorGeneratedSourcesDirectory = file("${buildDir}/generated-sources/main")
+}
+
+compileTestFixturesJava {
+    options.annotationProcessorGeneratedSourcesDirectory = file("${buildDir}/generated-sources/testFixtures")
+}
+
+compileTestJava {
+    options.annotationProcessorGeneratedSourcesDirectory = file("${buildDir}/generated-sources/test")
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+class ModuleDependenciesExtension {
+    def moduleProject
+
+    ModuleDependenciesExtension(Project moduleProject) {
+        this.moduleProject = moduleProject
+    }
+
+    def call(@DelegatesTo(ModuleDependenciesExtension) Closure closure) {
+        def configureModuleDependencies = closure.rehydrate(this, moduleProject, this)
+        configureModuleDependencies.resolveStrategy = Closure.DELEGATE_FIRST
+        configureModuleDependencies()
+    }
+
+    void module(String modulePath) {
+        moduleProject.dependencies {
+            add("compile", moduleProject.project(modulePath))
+            add("testFixturesCompile", project(path: modulePath, configuration: "testFixturesUsageCompile"))
+            add("testFixturesRuntime", project(path: modulePath, configuration: "testFixturesUsageRuntime"))
+        }
+    }
+}
+
+extensions.add("moduleDependencies", new ModuleDependenciesExtension(project))
+
+apply from: "${rootProject.projectDir}/codeCoverage.gradle"

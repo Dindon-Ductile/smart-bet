@@ -1,0 +1,20 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+    }
+    dependencies {
+        dependency "com.google.guava:guava:23.0"
+        dependency "org.projectlombok:lombok:1.16.18"
+        dependency "org.assertj:assertj-core:3.9.0"
+        dependencySet(group: "com.squareup.retrofit2", version: "2.2.0") {
+            entry "retrofit"
+            entry "converter-jackson"
+        }
+    }
+}
