@@ -1,0 +1,35 @@
+plugins {
+  id "com.moowork.node" version "1.2.0"
+}
+
+sourceSets {
+  main {
+    resources {
+      srcDir "${buildDir}/webapp"
+    }
+  }
+}
+
+def ngCommand = file("${projectDir}/node_modules/@angular/cli/bin/ng")
+
+task lintWebApp(type: NodeTask) {
+  dependsOn npmInstall
+  script = ngCommand
+  args = ["lint"]
+  inputs.dir("src")
+  inputs.dir("node_modules")
+  inputs.files("angular.json", "tslint.json", "tsconfig.json")
+  outputs.upToDateWhen { true }
+}
+
+task buildWebApp(type: NodeTask) {
+  dependsOn lintWebApp
+  script = ngCommand
+  args = ["build", "--prod"]
+  inputs.dir("src")
+  inputs.dir("node_modules")
+  inputs.files("angular.json", "tsconfig.json")
+  outputs.dir("${buildDir}/webapp")
+}
+
+processResources.dependsOn buildWebApp

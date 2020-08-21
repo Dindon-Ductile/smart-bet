@@ -1,4 +1,8 @@
 rootProject.name = 'demo'
-include 'server'
+
 include 'object-mapping'
+include 'webapp'
+include 'server'
+include 'db'
+include 'main'
 

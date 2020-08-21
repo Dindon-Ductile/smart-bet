@@ -5,3 +5,22 @@ bootJar.archiveFileName = "smartbet.jar"
 moduleDependencies {
     module ":object-mapping"
 }
+
+task copyWebAppFilesIntoPublic {
+    dependsOn ':webapp:build'
+    doLast {
+        copy {
+            from "${rootDir}/webapp/build/webapp"
+            into "${rootDir}/server/src/main/resources/public"
+        }
+    }
+}
+
+processResources.dependsOn(copyWebAppFilesIntoPublic)
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-devtools"
+    testFixturesCompile "org.springframework.boot:spring-boot-starter-test"
+    testFixturesCompile "org.springframework.security:spring-security-test"
+}
