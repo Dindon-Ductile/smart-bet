@@ -1,4 +1,3 @@
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-mongodb"
-    testFixturesCompile "com.github.fakemongo:fongo"
 }

@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      database: smart-bet
+
+api:
+  footballApi:
+    host: api-football-v1.p.rapidapi.com
+    key: ab500a03demsh23a8689111528ecp178111jsna9eaee0e37c1

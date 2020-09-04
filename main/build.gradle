@@ -1,3 +1,4 @@
 moduleDependencies {
     module ":db"
+    module ":retrofit"
 }
