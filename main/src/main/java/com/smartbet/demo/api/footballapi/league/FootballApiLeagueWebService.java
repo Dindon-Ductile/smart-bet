@@ -1,11 +1,12 @@
 package com.smartbet.demo.api.footballapi.league;
 
+import com.smartbet.demo.api.footballapi.league.domain.FootballApiLeagueBody;
+import com.smartbet.demo.api.footballapi.league.domain.FootballApiLeagueResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface FootballApiLeagueWebService {
     @GET("leagues/season/{year}")
-    Call<FootballApiLeague[]> getLeagues(@Path("year") Integer year);
+    Call<FootballApiLeagueResponse> getLeagues(@Path("year") Integer year);
 }

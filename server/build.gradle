@@ -4,6 +4,7 @@ bootJar.archiveFileName = "smartbet.jar"
 
 moduleDependencies {
     module ":object-mapping"
+    module ":main"
 }
 
 task copyWebAppFilesIntoPublic {

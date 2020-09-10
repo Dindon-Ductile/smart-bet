@@ -10,15 +10,20 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {AboutComponent} from './about/about.component';
 import {AppComponent} from './app.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {LeaguesComponent} from './leagues/leagues.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    LeaguesComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,12 @@ import {AppComponent} from './app.component';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatListModule,
+    DragDropModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

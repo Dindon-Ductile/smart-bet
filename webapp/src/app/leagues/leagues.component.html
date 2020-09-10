@@ -1,0 +1,43 @@
+<mat-form-field appearance="fill">
+  <mat-select [(value)]="selectedCountryId"
+              (selectionChange)="doFilter($event)"
+              placeholder="Trier par pays">
+    <mat-option *ngFor="let country of countries" [value]="country.id">
+      <img class="small-flag" *ngIf="!!country.flagUrl" [src]="country.flagUrl">
+      {{country.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Ligues Existantes</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="filteredLeagues"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of filteredLeagues" cdkDrag>
+        {{item.name}}
+        <img class="medium-flag" *ngIf="!!item.country.flagUrl" [src]="item.country.flagUrl">
+        <img *cdkDragPreview [src]="item.logoUrl" [alt]="item.name">
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Mes Ligues</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="userLeagues"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of userLeagues" cdkDrag>
+        {{item.name}}
+        <img class="medium-flag" *ngIf="!!item.country.flagUrl" [src]="item.country.flagUrl">
+        <img *cdkDragPreview [src]="item.logoUrl" [alt]="item.name">
+      </div>
+    </div>
+  </div>
+</div>

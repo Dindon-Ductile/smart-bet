@@ -3,15 +3,18 @@ package com.smartbet.demo.api.retrofit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
+@Configuration
 public class RetrofitConfiguration {
     public static final String FOOTBALL_API = "footballApi";
 
@@ -46,6 +49,7 @@ public class RetrofitConfiguration {
         return new ObjectMapper()
                 .configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .registerModule(new GuavaModule())
+                .registerModule(new JavaTimeModule())
                 .registerModule(new Jdk8Module());
     }
 }
