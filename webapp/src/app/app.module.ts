@@ -17,6 +17,7 @@ import {LeaguesComponent} from './leagues/leagues.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { NewBetComponent } from './new-bet/new-bet.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     HomeComponent,
     LeaguesComponent,
+    NewBetComponent,
   ],
   imports: [
     BrowserModule,

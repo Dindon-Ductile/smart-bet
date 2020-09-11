@@ -23,7 +23,7 @@ export class LeaguesRepository {
     return this.http.post('/api/user/leagues', league);
   }
 
-  deleteLeague(leagueId: string): Observable<any> {
+  deleteLeague(leagueId: number): Observable<any> {
     return this.http.delete(`/api/user/leagues/${leagueId}`);
   }
 }

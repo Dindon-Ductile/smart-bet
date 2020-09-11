@@ -22,10 +22,23 @@ export class LeaguesComponent implements OnInit {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
-            transferArrayItem(event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex);
+            if (event.previousContainer.data === this.filteredLeagues) {
+                const leagueToRegister = event.previousContainer.data[event.previousIndex];
+                this.leaguesRepository.registerLeague({leagueId: leagueToRegister.id}).subscribe(ok => {
+                    transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+                });
+            } else {
+                const leagueToRegister = event.previousContainer.data[event.previousIndex];
+                this.leaguesRepository.deleteLeague(leagueToRegister.id).subscribe(ok => {
+                    transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+                });
+            }
         }
     }
 
@@ -37,8 +50,17 @@ export class LeaguesComponent implements OnInit {
             this.userLeagues = leagues.userLeagues;
             this.availableLeagues = leagues.availableLeagues;
             this.filterLeaguesByCountry('FR');
-            this.countries = [...new Set(this.availableLeagues.map(item => item.country))]
-                .filter(country => !!country.id);
+            this.countries = this.availableLeagues.filter((obj, pos, arr) => {
+                return arr.map(mapObj => mapObj.country.name).indexOf(obj.country.name) === pos;
+            }).map(l => l.country).sort((a, b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            });
         });
     }
 
