@@ -8,28 +8,35 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 @Data
 @Document(collection = "userCombinedBets")
-public class MongoUserCombinedBet {
+class MongoUserCombinedBet {
     @Id
     private final UUID id;
     private final UUID userId;
-    private final List<SimpleBet> entries;
+    private final List<MongoSimpleBet> entries;
     private final double betMoney;
     private final Instant createdAt;
     private final Optional<Instant> lastUpdatedAt;
 
     static MongoUserCombinedBet build(UserCombinedBet userCombinedBet) {
+        List<MongoSimpleBet> entries = userCombinedBet.getEntries().stream()
+                .map(MongoSimpleBet::build)
+                .collect(Collectors.toList());
         return new MongoUserCombinedBet(userCombinedBet.getId(), userCombinedBet.getUserId(),
-                userCombinedBet.getEntries(), userCombinedBet.getBetMoney(), userCombinedBet.getCreatedAt(),
+                entries, userCombinedBet.getBetMoney(), userCombinedBet.getCreatedAt(),
                 userCombinedBet.getLastUpdatedAt());
     }
 
     UserCombinedBet toDomain() {
-        return new UserCombinedBet(id, userId, ImmutableList.copyOf(entries), betMoney, createdAt, lastUpdatedAt);
+        ImmutableList<SimpleBet> entries = this.entries.stream()
+                .map(MongoSimpleBet::toDomain)
+                .collect(toImmutableList());
+        return new UserCombinedBet(id, userId, entries, betMoney, createdAt, lastUpdatedAt);
     }
 }

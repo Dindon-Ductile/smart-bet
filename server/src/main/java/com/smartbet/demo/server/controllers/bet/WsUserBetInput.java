@@ -5,6 +5,7 @@ import com.smartbet.demo.bet.domain.SimpleBet;
 import lombok.Data;
 
 @Data
+@ValidWsUserBetInput
 public class WsUserBetInput {
     private final ImmutableList<SimpleBet> entries;
     private final double betMoney;

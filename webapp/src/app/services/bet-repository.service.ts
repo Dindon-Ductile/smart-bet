@@ -16,6 +16,10 @@ export class BetsRepository {
     return this.http.post<UserCombinedBet>('/api/user/bets', bet);
   }
 
+  updateUserBet(bet: CombinedBet, betId: string): Observable<UserCombinedBet> {
+    return this.http.put<UserCombinedBet>(`/api/user/bets/${betId}`, bet);
+  }
+
   getBetGrids(betId: string): Observable<UserBetGrids> {
     return this.http.get<UserBetGrids>(`/api/user/bets/${betId}/grids`);
   }

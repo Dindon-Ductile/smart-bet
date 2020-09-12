@@ -46,9 +46,9 @@ public class UserCombinedBetsRepository {
     public void update(UserCombinedBetUpdate update) {
         Query byId = query(where("_id").is(update.getId()));
         Update updateFields = new Update()
-                .addToSet("entries", update.getEntries())
-                .addToSet("betMoney", update.getBetMoney())
-                .addToSet("lastUpdatedAt", update.getLastUpdatedAt());
+                .set("entries", update.getEntries())
+                .set("betMoney", update.getBetMoney())
+                .set("lastUpdatedAt", update.getLastUpdatedAt());
         mongoOperations.updateFirst(byId, updateFields, MongoUserCombinedBet.class);
     }
 

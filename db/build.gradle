@@ -1,3 +1,7 @@
+moduleDependencies {
+    module ':object-mapping'
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-mongodb"
 }

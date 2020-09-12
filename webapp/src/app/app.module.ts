@@ -23,6 +23,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NumericDirective} from './services/decimal';
 import { BetGridsComponent } from './bet-grids/bet-grids.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatChipsModule} from '@angular/material/chips';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -33,6 +38,7 @@ import { BetGridsComponent } from './bet-grids/bet-grids.component';
     NewBetComponent,
     NumericDirective,
     BetGridsComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,11 @@ import { BetGridsComponent } from './bet-grids/bet-grids.component';
     MatInputModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatChipsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

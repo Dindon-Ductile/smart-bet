@@ -28,11 +28,12 @@ export class NewBetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userFakeFixtures = this.fixturesRepository.getUserFakeFixtures();
-    this.fixtures = userFakeFixtures;
-    this.fixturesByDate = userFakeFixtures.fixturesByDate[0];
-    this.selectedDate = this.fixturesByDate.date;
-    this.dates = userFakeFixtures.fixturesByDate.map(f => f.date);
+    this.fixturesRepository.getUserLeaguesFixtures().subscribe(fixtures => {
+      this.fixtures = fixtures;
+      this.fixturesByDate = fixtures.fixturesByDate[0];
+      this.selectedDate = this.fixturesByDate.date;
+      this.dates = fixtures.fixturesByDate.map(f => f.date);
+    });
   }
 
   dropBetableFixture(event: CdkDragDrop<SimpleBet[], any>): any {
