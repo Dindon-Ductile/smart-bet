@@ -3,6 +3,9 @@ spring:
     mongodb:
       database: smart-bet
 
+server:
+  port: 8060
+
 api:
   footballApi:
     host: api-football-v1.p.rapidapi.com

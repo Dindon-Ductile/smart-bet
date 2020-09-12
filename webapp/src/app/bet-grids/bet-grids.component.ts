@@ -6,8 +6,8 @@ import {Fixture} from '../model/fixture';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {SimpleBet} from '../model/bet';
 import {PageEvent} from '@angular/material/paginator';
-import {DialogComponent} from "../dialog/dialog.component";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {DialogComponent} from '../dialog/dialog.component';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-bet-grids',
