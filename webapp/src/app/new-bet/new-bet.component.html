@@ -1,0 +1,78 @@
+<div class="main-container">
+
+  <mat-form-field appearance="fill" class="margin-20">
+    <mat-select [(value)]="selectedDate"
+                (selectionChange)="doFilter($event)"
+                placeholder="Trier par pays">
+      <mat-option *ngFor="let date of dates" [value]="date">
+        {{date}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div cdkDropListGroup>
+    <div class="fixtures-container">
+      <h2>Matchs à Venir</h2>
+
+      <div cdkDropList [cdkDropListData]="fixturesByDate.fixtures" class="fixtures-list"
+           (cdkDropListDropped)="dropFixture($event)">
+        <div class="example-box fixture" *ngFor="let item of fixturesByDate.fixtures" cdkDrag>
+          <span>{{item.startsAtTime}}</span>
+          <span>{{computeFixtureName(item)}}</span>
+          <span>{{getLeague(item).name}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="bet-container">
+      <h2>Mon Combiné</h2>
+
+      <div cdkDropList [cdkDropListData]="bets" class="bet-list" (cdkDropListDropped)="dropBetableFixture($event)">
+        <div class="example-box bet" *ngFor="let item of bets" cdkDrag>
+          <div class="bet-title">
+            <span>{{computeFixtureName(item.fixture)}}</span>
+            <span>{{computeFixtureDate(item.fixture)}}</span>
+          </div>
+          <div class="bet-outcome">
+            <mat-form-field>
+              <div class="checkbox">
+                <mat-checkbox [(ngModel)]="item.outcomes[0].selected">1</mat-checkbox>
+              </div>
+              <input matInput appNumeric decimals="2" [(ngModel)]="item.outcomes[0].odds"
+                     type="number" max="99.99" step="0.01">
+            </mat-form-field>
+            <mat-form-field>
+              <div class="checkbox">
+                <mat-checkbox [(ngModel)]="item.outcomes[1].selected">N</mat-checkbox>
+              </div>
+              <input matInput appNumeric decimals="2" [(ngModel)]="item.outcomes[1].odds"
+                     type="number" max="99.99" step="0.01">
+            </mat-form-field>
+            <mat-form-field>
+              <div class="checkbox">
+                <mat-checkbox [(ngModel)]="item.outcomes[2].selected">2</mat-checkbox>
+              </div>
+              <input matInput appNumeric decimals="2" [(ngModel)]="item.outcomes[2].odds"
+                     type="number" max="99.99" step="0.01">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="bet-action">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Mise</mat-label>
+            <input matInput appNumeric decimals="2"
+                   [(ngModel)]="betMoney"
+                   type="text" class="example-right-align">
+            <span matSuffix>€</span>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-flat-button color="accent" (click)="registerBetAndGenerateGrids()">Générer les grilles</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

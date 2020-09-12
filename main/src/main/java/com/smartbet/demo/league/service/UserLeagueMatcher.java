@@ -22,7 +22,7 @@ public class UserLeagueMatcher {
     }
 
     public ImmutableList<League> getLeagues(ImmutableCollection<League> allLeagues) {
-        ImmutableSet<UserLeague> userLeagues = userLeaguesRepository.getUserLeagues(UserId.userId);
+        ImmutableSet<UserLeague> userLeagues = userLeaguesRepository.findUserLeagues(UserId.userId);
         return matchUserLeagues(allLeagues, userLeagues);
     }
 

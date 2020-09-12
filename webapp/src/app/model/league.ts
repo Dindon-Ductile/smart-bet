@@ -8,6 +8,14 @@ export interface League {
   seasonEnd: number;
 }
 
+export interface SimpleLeague {
+  id: number;
+  name: string;
+  country: string;
+  logoUrl: string;
+  flagUrl: string;
+}
+
 export interface Country {
   id?: string;
   name: string;

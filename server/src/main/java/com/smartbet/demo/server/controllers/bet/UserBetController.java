@@ -38,7 +38,6 @@ public class UserBetController {
     @PostMapping("/api/user/bets")
     @ResponseStatus(CREATED)
     public UserCombinedBet createBet(@Valid @RequestBody WsUserBetInput creation) {
-
         UserCombinedBetCreation build =
                 UserCombinedBetCreation.build(UserId.userId, creation.getEntries(), creation.getBetMoney());
         userCombinedBetsRepository.create(build);

@@ -1,6 +1,7 @@
 package com.smartbet.demo.grid.domain;
 
 import com.google.common.collect.ImmutableList;
+import com.smartbet.demo.fixtures.domain.Fixture;
 import lombok.Data;
 
 import java.util.UUID;

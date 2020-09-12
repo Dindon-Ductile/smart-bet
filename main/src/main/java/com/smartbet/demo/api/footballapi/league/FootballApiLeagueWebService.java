@@ -1,6 +1,5 @@
 package com.smartbet.demo.api.footballapi.league;
 
-import com.smartbet.demo.api.footballapi.league.domain.FootballApiLeagueBody;
 import com.smartbet.demo.api.footballapi.league.domain.FootballApiLeagueResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -3,11 +3,10 @@ package com.smartbet.demo.grid.service;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.smartbet.demo.bet.domain.CombinedBet;
-import com.smartbet.demo.bet.domain.UserCombinedBet;
 import com.smartbet.demo.bet.domain.SelectedBetOutcome;
 import com.smartbet.demo.bet.domain.SimpleBet;
-import com.smartbet.demo.grid.domain.BetGrid;
 import com.smartbet.demo.grid.domain.AdvancedBetGrid;
+import com.smartbet.demo.grid.domain.BetGrid;
 import com.smartbet.demo.grid.domain.BetGridEntry;
 import com.smartbet.demo.grid.domain.CombinedBetResult;
 import org.springframework.stereotype.Service;
@@ -53,8 +52,8 @@ public class CombinedBetResultComputer {
     private ImmutableList<BetGridEntry> filterOutUndesiredOutcomes(SimpleBet entry) {
         return entry.getOutcomes().stream()
                 .filter(SelectedBetOutcome::isSelected)
-                .map(outcome -> new BetGridEntry(entry.getFixtureId(), entry.getFixtureName(),
-                        outcome.getOutcome(), outcome.getOdds()))
+                .map(outcome -> new BetGridEntry(entry.getFixture().getFixtureId(), outcome.getOutcome(),
+                        outcome.getOdds()))
                 .collect(toImmutableList());
     }
 }

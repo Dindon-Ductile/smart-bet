@@ -16,7 +16,7 @@ public class UserLeaguesRepository {
         this.mongoUserLeaguesRepository = mongoUserLeaguesRepository;
     }
 
-    public ImmutableSet<UserLeague> getUserLeagues(UUID userId) {
+    public ImmutableSet<UserLeague> findUserLeagues(UUID userId) {
         return mongoUserLeaguesRepository.findAll().stream()
                 .map(MongoUserLeague::toUserLeague)
                 .collect(toImmutableSet());

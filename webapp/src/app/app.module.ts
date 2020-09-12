@@ -18,6 +18,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { NewBetComponent } from './new-bet/new-bet.component';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {NumericDirective} from './services/decimal';
+import { BetGridsComponent } from './bet-grids/bet-grids.component';
 
 
 @NgModule({
@@ -26,6 +31,8 @@ import { NewBetComponent } from './new-bet/new-bet.component';
     HomeComponent,
     LeaguesComponent,
     NewBetComponent,
+    NumericDirective,
+    BetGridsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,11 @@ import { NewBetComponent } from './new-bet/new-bet.component';
     MatListModule,
     DragDropModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
