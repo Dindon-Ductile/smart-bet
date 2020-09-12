@@ -4,7 +4,8 @@ spring:
       database: smart-bet
 
 server:
-  port: 8060
+  port: 8080
+  address: 127.0.0.1
 
 api:
   footballApi:

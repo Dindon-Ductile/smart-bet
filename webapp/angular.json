@@ -69,7 +69,6 @@
           "options": {
             "browserTarget": "webapp:build",
             "proxyConfig": "src/proxy.conf.json",
-            "port": 8080
           },
           "configurations": {
             "production": {
