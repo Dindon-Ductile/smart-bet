@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BetsRepository} from '../services/bet-repository.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AdvancedBetGrid, BetGridEntry, UserBetGrids} from '../model/grid';
 import {Fixture} from '../model/fixture';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -23,7 +23,7 @@ export class BetGridsComponent implements OnInit {
 
   constructor(private betsRepository: BetsRepository,
               private route: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class BetGridsComponent implements OnInit {
         this.grids = updatedGrids;
         this.currentGrid = this.grids.combinedBetResult.playableGrids[this.pageIndex];
       });
-    } , error => {
+    }, error => {
       const matDialogConfig = new MatDialogConfig();
       matDialogConfig.data = {
         message: 'Il y a une erreur dans ton pari: une côte à zéro, un match sans résultat ou une mise de 0',
@@ -89,5 +89,9 @@ export class BetGridsComponent implements OnInit {
     } else if (outcome === 'AWAY') {
       return '2';
     }
+  }
+
+  returnToFixtures(): any {
+    this.router.navigate(['/bets', this.betId]);
   }
 }

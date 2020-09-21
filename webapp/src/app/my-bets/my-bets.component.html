@@ -1,0 +1,32 @@
+<div class="main-container">
+  <mat-card class="example-card" *ngFor="let userBet of userBets">
+    <mat-card-header>
+      <mat-card-title>
+        {{displayTimeStamp(userBet.createdAt)}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip-list>
+          <mat-chip>{{displayDouble(userBet.betMoney)}}€</mat-chip>
+        </mat-chip-list>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let entry of max4Entries(userBet.entries)">
+          {{computeFixtureName(entry.fixture)}}
+        </mat-list-item>
+        <mat-list-item *ngIf="userBet.entries.length - 4 > 0">
+          et {{userBet.entries.length - 4}} autres...
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-raised-button color="primary" [routerLink]="['/bets', userBet.id]">Modifier</a>
+      <a mat-raised-button [routerLink]="['/bets', userBet.id, 'grids']">Voir les grilles</a>
+      <a mat-mini-fab color="warn" (click)="deleteBet(userBet.id)">
+        <mat-icon>delete</mat-icon>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

@@ -3,6 +3,7 @@ apply plugin: "org.springframework.boot"
 bootJar.archiveFileName = "smartbet.jar"
 
 moduleDependencies {
+    module ":webapp"
     module ":object-mapping"
     module ":main"
 }

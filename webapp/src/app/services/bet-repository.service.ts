@@ -20,6 +20,18 @@ export class BetsRepository {
     return this.http.put<UserCombinedBet>(`/api/user/bets/${betId}`, bet);
   }
 
+  getBet(betId: string): Observable<UserCombinedBet> {
+    return this.http.get<UserCombinedBet>(`/api/user/bets/${betId}`);
+  }
+
+  getBets(): Observable<UserCombinedBet[]> {
+    return this.http.get<UserCombinedBet[]>(`/api/user/bets`);
+  }
+
+  delete(betId: string): Observable<any> {
+    return this.http.delete<any>(`/api/user/bets/${betId}`);
+  }
+
   getBetGrids(betId: string): Observable<UserBetGrids> {
     return this.http.get<UserBetGrids>(`/api/user/bets/${betId}/grids`);
   }

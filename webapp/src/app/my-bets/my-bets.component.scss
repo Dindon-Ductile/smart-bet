@@ -1,0 +1,17 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.example-card {
+  padding: 2rem 3rem;
+  margin: 2rem;
+  width: 25vw;
+
+  mat-card-content {
+    margin: 1rem 0 2.5rem;
+  }
+}

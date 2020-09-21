@@ -28,6 +28,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatChipsModule} from '@angular/material/chips';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MyBetsComponent } from './my-bets/my-bets.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     NumericDirective,
     BetGridsComponent,
     DialogComponent,
+    MyBetsComponent,
   ],
   imports: [
     BrowserModule,

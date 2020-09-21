@@ -6,7 +6,7 @@ import {CombinedBet, SimpleBet} from '../model/bet';
 import {MatSelectChange} from '@angular/material/select';
 import {SimpleLeague} from '../model/league';
 import {BetsRepository} from '../services/bet-repository.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-bet',
@@ -20,19 +20,46 @@ export class NewBetComponent implements OnInit {
   betMoney: number;
   selectedDate: string;
   dates: string[];
+  betId: string;
 
 
   constructor(private fixturesRepository: FixturesRepository,
               private betRepository: BetsRepository,
-              private router: Router) {
+              private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.fixturesRepository.getUserLeaguesFixtures().subscribe(fixtures => {
-      this.fixtures = fixtures;
-      this.fixturesByDate = fixtures.fixturesByDate[0];
-      this.selectedDate = this.fixturesByDate.date;
-      this.dates = fixtures.fixturesByDate.map(f => f.date);
+    this.route.params.subscribe(params => {
+      this.betId = params.id;
+      if (!!this.betId) {
+        this.betRepository.getBet(this.betId).subscribe(userBet => {
+          this.bets = userBet.entries;
+          this.betMoney = userBet.betMoney;
+          this.fixturesRepository.getUserLeaguesFixtures().subscribe(fixtures => {
+            this.fixtures = fixtures;
+            this.fixtures.fixturesByDate = this.fixtures.fixturesByDate.map(fixtureByDate => {
+                return {
+                  date: fixtureByDate.date,
+                  fixtures: fixtureByDate.fixtures.filter(fixture =>
+                    !this.bets.some(bet =>
+                      bet.fixture.fixtureId === fixture.fixtureId)
+                  )
+                };
+              }
+            );
+            this.fixturesByDate = fixtures.fixturesByDate[0];
+            this.selectedDate = this.fixturesByDate.date;
+            this.dates = fixtures.fixturesByDate.map(f => f.date);
+          });
+        });
+      } else {
+        this.fixturesRepository.getUserLeaguesFixtures().subscribe(fixtures => {
+          this.fixtures = fixtures;
+          this.fixturesByDate = fixtures.fixturesByDate[0];
+          this.selectedDate = this.fixturesByDate.date;
+          this.dates = fixtures.fixturesByDate.map(f => f.date);
+        });
+      }
     });
   }
 
@@ -107,8 +134,14 @@ export class NewBetComponent implements OnInit {
       entries: this.bets,
       betMoney: this.betMoney
     };
-    this.betRepository.createUserBet(combinedBet).subscribe(userBet => {
-      this.router.navigate(['/bets', userBet.id, 'grids']);
-    });
+    if (!!this.betId) {
+      this.betRepository.updateUserBet(combinedBet, this.betId).subscribe(userBet => {
+        this.router.navigate(['/bets', this.betId, 'grids']);
+      });
+    } else {
+      this.betRepository.createUserBet(combinedBet).subscribe(userBet => {
+        this.router.navigate(['/bets', userBet.id, 'grids']);
+      });
+    }
   }
 }
