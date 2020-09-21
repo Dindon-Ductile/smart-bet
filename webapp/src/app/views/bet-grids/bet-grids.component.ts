@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {BetsRepository} from '../services/bet-repository.service';
+import {BetsRepository} from '../../services/bet-repository.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AdvancedBetGrid, BetGridEntry, UserBetGrids} from '../model/grid';
-import {Fixture} from '../model/fixture';
+import {AdvancedBetGrid, UserBetGrids} from '../../model/grid';
+import {Fixture} from '../../model/fixture';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {SimpleBet} from '../model/bet';
+import {SimpleBet} from '../../model/bet';
 import {PageEvent} from '@angular/material/paginator';
 import {DialogComponent} from '../dialog/dialog.component';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -20,6 +20,7 @@ export class BetGridsComponent implements OnInit {
   pageIndex = 0;
   currentGrid: AdvancedBetGrid;
   displayedColumns: string[] = ['fixture', 'outcome', 'odds'];
+  homogenousGains = true;
 
   constructor(private betsRepository: BetsRepository,
               private route: ActivatedRoute,
@@ -88,6 +89,22 @@ export class BetGridsComponent implements OnInit {
       return 'N';
     } else if (outcome === 'AWAY') {
       return '2';
+    }
+  }
+
+  getBetMoney(grid: AdvancedBetGrid): string {
+    if (this.homogenousGains) {
+      return this.displayDouble(grid.adjustedMoneyBet);
+    } else {
+      return this.displayDouble(grid.equitableMoneyBet);
+    }
+  }
+
+  getBetGain(grid: AdvancedBetGrid): string {
+    if (this.homogenousGains) {
+      return this.displayDouble(grid.adjustedGain);
+    } else {
+      return this.displayDouble(grid.equitableGain);
     }
   }
 

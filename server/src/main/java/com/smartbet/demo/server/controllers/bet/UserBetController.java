@@ -10,8 +10,10 @@ import com.smartbet.demo.user.UserId;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.UUID;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
@@ -32,7 +34,9 @@ public class UserBetController {
     @GetMapping("/api/user/bets")
     @ResponseStatus(OK)
     public ImmutableList<UserCombinedBet> getUserBets() {
-        return userCombinedBetsRepository.findAllByUserId(UserId.userId);
+        return userCombinedBetsRepository.findAllByUserId(UserId.userId).stream()
+                .sorted(Comparator.comparing(UserCombinedBet::getCreatedAt).reversed())
+                .collect(toImmutableList());
     }
 
     @PostMapping("/api/user/bets")

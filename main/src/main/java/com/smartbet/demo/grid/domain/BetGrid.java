@@ -9,4 +9,5 @@ import java.util.UUID;
 public class BetGrid {
     private final UUID id;
     private final ImmutableList<BetGridEntry> entries;
+    private final double combinedOdds;
 }

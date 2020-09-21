@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BetsRepository} from '../services/bet-repository.service';
-import {SimpleBet, UserCombinedBet} from '../model/bet';
-import {Fixture} from '../model/fixture';
+import {BetsRepository} from '../../services/bet-repository.service';
+import {SimpleBet, UserCombinedBet} from '../../model/bet';
+import {Fixture} from '../../model/fixture';
 
 @Component({
   selector: 'app-my-bets',

@@ -10,6 +10,9 @@
         <div class="bet-box"
              cdkDrag cdkDragBoundary=".bet-list"
              *ngFor="let item of grids.combinedBetResult.bet.entries">
+          <div>
+            <mat-slide-toggle [(ngModel)]="item.active"></mat-slide-toggle>
+          </div>
           <div class="bet-title">
             <span>{{computeFixtureName(item.fixture)}}</span>
             <span>{{computeFixtureDate(item.fixture)}}</span>
@@ -59,13 +62,14 @@
       </div>
     </div>
     <div class="grid-container">
+      <mat-slide-toggle [(ngModel)]="homogenousGains">Gains homogènes</mat-slide-toggle>
       <h2>Grille {{pageIndex + 1}}</h2>
 
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>
             <mat-chip-list>
-              <mat-chip>A miser : {{displayDouble(currentGrid.equitableMoneyBet)}}€</mat-chip>
+              <mat-chip>A miser : {{getBetMoney(currentGrid)}}€</mat-chip>
             </mat-chip-list>
           </mat-card-title>
         </mat-card-header>
@@ -96,7 +100,7 @@
         </mat-card-content>
         <mat-card-actions>
           <mat-chip-list>
-            <mat-chip>Gains: {{displayDouble(currentGrid.equitableGain)}}€</mat-chip>
+            <mat-chip>Gains: {{getBetGain(currentGrid)}}€</mat-chip>
             <mat-chip>Côtes cumulées: {{displayDouble(currentGrid.combinedOdds)}}</mat-chip>
           </mat-chip-list>
         </mat-card-actions>

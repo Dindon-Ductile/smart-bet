@@ -8,6 +8,7 @@ export interface CombinedBet {
 export interface SimpleBet {
   fixture: Fixture;
   outcomes: SelectedBetOutcome[];
+  active: boolean;
 }
 
 export interface UserCombinedBet {

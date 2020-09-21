@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Country, League} from '../model/league';
-import {LeaguesRepository} from '../services/leagues-repository.service';
+import {Country, League} from '../../model/league';
+import {LeaguesRepository} from '../../services/leagues-repository.service';
 import {MatSelectChange} from '@angular/material/select';
 
 @Component({

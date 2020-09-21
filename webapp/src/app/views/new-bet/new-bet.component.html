@@ -27,6 +27,9 @@
 
       <div cdkDropList [cdkDropListData]="bets" class="bet-list" (cdkDropListDropped)="dropBetableFixture($event)">
         <div class="example-box bet" *ngFor="let item of bets" cdkDrag>
+          <div>
+            <mat-slide-toggle [(ngModel)]="item.active"></mat-slide-toggle>
+          </div>
           <div class="bet-title">
             <span>{{computeFixtureName(item.fixture)}}</span>
             <span>{{computeFixtureDate(item.fixture)}}</span>

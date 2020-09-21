@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {LeaguesComponent} from './leagues/leagues.component';
-import {NewBetComponent} from './new-bet/new-bet.component';
-import {BetGridsComponent} from './bet-grids/bet-grids.component';
-import {MyBetsComponent} from './my-bets/my-bets.component';
+import {HomeComponent} from './views/home/home.component';
+import {LeaguesComponent} from './views/leagues/leagues.component';
+import {NewBetComponent} from './views/new-bet/new-bet.component';
+import {BetGridsComponent} from './views/bet-grids/bet-grids.component';
+import {MyBetsComponent} from './views/my-bets/my-bets.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},

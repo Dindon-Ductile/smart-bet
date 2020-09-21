@@ -8,4 +8,5 @@ import lombok.Data;
 public class SimpleBet {
     private final Fixture fixture;
     private final ImmutableList<SelectedBetOutcome> outcomes;
+    private final boolean active;
 }

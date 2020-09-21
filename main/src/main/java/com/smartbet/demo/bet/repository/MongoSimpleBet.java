@@ -12,12 +12,13 @@ import java.util.List;
 class MongoSimpleBet {
     private final Fixture fixture;
     private final List<SelectedBetOutcome> outcomes;
+    private final boolean active;
 
     static MongoSimpleBet build(SimpleBet bet) {
-        return new MongoSimpleBet(bet.getFixture(), bet.getOutcomes());
+        return new MongoSimpleBet(bet.getFixture(), bet.getOutcomes(), bet.isActive());
     }
 
     SimpleBet toDomain() {
-        return new SimpleBet(fixture, ImmutableList.copyOf(outcomes));
+        return new SimpleBet(fixture, ImmutableList.copyOf(outcomes), active);
     }
 }

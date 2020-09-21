@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FixturesRepository} from '../services/fixtures-repository.service';
+import {FixturesRepository} from '../../services/fixtures-repository.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Fixture, FixturesAtDate, UserLeaguesFixtures} from '../model/fixture';
-import {CombinedBet, SimpleBet} from '../model/bet';
+import {Fixture, FixturesAtDate, UserLeaguesFixtures} from '../../model/fixture';
+import {CombinedBet, SimpleBet} from '../../model/bet';
 import {MatSelectChange} from '@angular/material/select';
-import {SimpleLeague} from '../model/league';
-import {BetsRepository} from '../services/bet-repository.service';
+import {SimpleLeague} from '../../model/league';
+import {BetsRepository} from '../../services/bet-repository.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -104,7 +104,8 @@ export class NewBetComponent implements OnInit {
           outcome: 'AWAY',
           selected: true
         }
-      ]
+      ],
+      active: true
     };
   }
 
