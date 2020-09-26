@@ -9,16 +9,24 @@ export interface UserBetGrids {
 export interface CombinedBetResult {
   bet: CombinedBet;
   playableGrids: AdvancedBetGrid[];
+  actualMoneyAllocatedAmongstGrids: number;
 }
 
 export interface AdvancedBetGrid {
   id: string;
   entries: BetGridEntry[];
   combinedOdds: number;
-  equitableMoneyBet: number;
-  adjustedMoneyBet: number;
-  equitableGain: number;
-  adjustedGain: number;
+  equitableMoneyOverview: BetGridMoneyOverview;
+  adjustedMoneyOverview: BetGridMoneyOverview;
+}
+
+export interface BetGridMoneyOverview {
+  moneyBet: number;
+  comboBoosterPercentage: number;
+  baseGain: number;
+  comboBoosterGain: number;
+  totalGain: number;
+  combinedOdds: number;
 }
 
 export interface BetGridEntry {

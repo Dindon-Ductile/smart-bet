@@ -27,8 +27,13 @@ public class CombinedBetResultComputer {
         ImmutableList<BetGrid> grids = betGridsComputer.computeGrids(selectedEntries);
         ImmutableList<AdvancedBetGrid> advancedBetGrids =
                 advancedGridsComputer.computeAdvancedGrids(bet.getBetMoney(), grids);
-        return new CombinedBetResult(bet, advancedBetGrids);
+        double moneyBetUsed = computeMoneyBetUsed(advancedBetGrids);
+        return new CombinedBetResult(bet, advancedBetGrids, moneyBetUsed);
     }
 
-
+    private double computeMoneyBetUsed(ImmutableList<AdvancedBetGrid> advancedBetGrids) {
+        return advancedBetGrids.stream()
+                .mapToDouble(grid -> grid.getAdjustedMoneyOverview().getMoneyBet())
+                .sum();
+    }
 }

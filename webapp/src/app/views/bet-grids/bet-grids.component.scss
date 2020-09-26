@@ -22,6 +22,20 @@
   margin: 40px;
   display: inline-block;
   vertical-align: top;
+
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    #grid {
+      flex-grow: 4;
+    }
+
+    #overview {
+      flex-grow: 1;
+    }
+  }
 }
 
 table {
@@ -37,7 +51,7 @@ table {
 }
 
 .bet-container {
-  width: 500px;
+  width: 600px;
   max-width: 100%;
   margin: 40px;
   display: inline-block;
@@ -51,6 +65,10 @@ table {
   border-radius: 4px;
   overflow: hidden;
   display: block;
+}
+
+.bet-active {
+  margin-right: 1.5rem
 }
 
 .bet-title {

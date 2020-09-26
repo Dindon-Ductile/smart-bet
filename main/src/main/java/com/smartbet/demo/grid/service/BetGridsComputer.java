@@ -26,8 +26,9 @@ public class BetGridsComputer {
     }
 
     private double computeCombinedOdds(ImmutableList<BetGridEntry> entries) {
-        return entries.stream()
+        double baseCombinedOdds = entries.stream()
                 .mapToDouble(BetGridEntry::getOdds)
                 .reduce(1, (a, b) -> a * b);
+        return Rounder.roundWith2Decimals(baseCombinedOdds);
     }
 }

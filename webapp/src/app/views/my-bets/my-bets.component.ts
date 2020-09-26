@@ -36,8 +36,8 @@ export class MyBetsComponent implements OnInit {
     return `${da} ${mo} ${ye}`;
   }
 
-  max4Entries(entries: SimpleBet[]): SimpleBet[] {
-    return entries.slice(0, 4);
+  firstFixture(entries: SimpleBet[]): SimpleBet[] {
+    return entries.slice(0, 1);
   }
 
   deleteBet(id: string): any {

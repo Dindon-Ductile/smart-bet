@@ -12,11 +12,11 @@
     </mat-card-header>
     <mat-card-content>
       <mat-list>
-        <mat-list-item *ngFor="let entry of max4Entries(userBet.entries)">
+        <mat-list-item *ngFor="let entry of firstFixture(userBet.entries)">
           {{computeFixtureName(entry.fixture)}}
         </mat-list-item>
-        <mat-list-item *ngIf="userBet.entries.length - 4 > 0">
-          et {{userBet.entries.length - 4}} autres...
+        <mat-list-item *ngIf="userBet.entries.length - 1 > 0">
+          et {{userBet.entries.length - 1}} autres...
         </mat-list-item>
       </mat-list>
     </mat-card-content>

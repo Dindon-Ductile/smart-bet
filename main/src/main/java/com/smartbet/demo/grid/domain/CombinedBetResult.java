@@ -8,4 +8,5 @@ import lombok.Data;
 public class CombinedBetResult {
     private final CombinedBet bet;
     private final ImmutableList<AdvancedBetGrid> playableGrids;
+    private final double actualMoneyAllocatedAmongstGrids;
 }

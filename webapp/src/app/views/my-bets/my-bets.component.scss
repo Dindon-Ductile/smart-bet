@@ -3,13 +3,13 @@
   flex-direction: row;
   flex-flow: wrap;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .example-card {
   padding: 2rem 3rem;
   margin: 2rem;
-  width: 25vw;
+  width: 16vw;
 
   mat-card-content {
     margin: 1rem 0 2.5rem;

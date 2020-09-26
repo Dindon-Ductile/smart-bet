@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BetsRepository} from '../../services/bet-repository.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AdvancedBetGrid, UserBetGrids} from '../../model/grid';
+import {AdvancedBetGrid, BetGridMoneyOverview, UserBetGrids} from '../../model/grid';
 import {Fixture} from '../../model/fixture';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {SimpleBet} from '../../model/bet';
@@ -92,19 +92,11 @@ export class BetGridsComponent implements OnInit {
     }
   }
 
-  getBetMoney(grid: AdvancedBetGrid): string {
+  getBetOverview(grid: AdvancedBetGrid): BetGridMoneyOverview {
     if (this.homogenousGains) {
-      return this.displayDouble(grid.adjustedMoneyBet);
+      return grid.adjustedMoneyOverview;
     } else {
-      return this.displayDouble(grid.equitableMoneyBet);
-    }
-  }
-
-  getBetGain(grid: AdvancedBetGrid): string {
-    if (this.homogenousGains) {
-      return this.displayDouble(grid.adjustedGain);
-    } else {
-      return this.displayDouble(grid.equitableGain);
+      return grid.equitableMoneyOverview;
     }
   }
 
