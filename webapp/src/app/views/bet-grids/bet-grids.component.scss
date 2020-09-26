@@ -17,23 +17,23 @@
 }
 
 .grid-container {
-  width: 700px;
+  width: 750px;
   max-width: 100%;
   margin: 40px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   vertical-align: top;
 
   mat-card-content {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
 
     #grid {
-      flex-grow: 4;
+      width: 550px;
     }
 
     #overview {
-      flex-grow: 1;
+      max-width: 400px;
     }
   }
 }
